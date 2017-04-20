@@ -1,0 +1,10 @@
+{
+  "name": "image-musician",
+  "version": "1.0.0",
+  "author": "Camilo PINEDA SERNA",
+  "description": "app wich emits UPD payloads with JSON data from musician",
+
+  "dependencies": {
+    "uuid": "^3.0.1"
+  }
+}
