@@ -107,13 +107,13 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 | | *Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | __musicians__, every second |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Enter your response here...* |
+| | __auditor__, store them in an array if not already there |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | *Enter your response here...* |
+| | at least uuid, instrument and activeSince. Also possible the sound. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | UDP will contain __JSON__ object. The auditor will update an array of musicians |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -121,21 +121,24 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic
 | ---  | ---
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**?
-| | *Enter your response here...*
+| | `var payload = JSON.stringify(musician);`
 |Question | What is **npm**?
-| | *Enter your response here...*
+| | node package manager : for the _libraries_ in javascript, the dependencies. to install all the dependencies listed in the package.json file.
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?
-| | *Enter your response here...*
+| | alias: `npm i` This command installs a package, and any packages that it depends on. -S, --save: Package will appear in your dependencies [in the package.json file].
 |Question | How can we use the `https://www.npmjs.com/` web site?
-| | *Enter your response here...*
+| | search the packages available (and download)
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122?
-| | *Enter your response here...*
+| | https://www.npmjs.com/package/uuid : var uuid = require('uuid'); musician.uuid = uuid.v4();
 |Question | In Node.js, how can we execute a function on a **periodic** basis?
-| | *Enter your response here...*
+| | var repeat = setInterval(emitSound, 1000);
 |Question | In Node.js, how can we **emit UDP datagrams**?
-| | *Enter your response here...*
+| | [after creating a socket : `var dgram = require('dgram'); var socket = dgram.createSocket('udp4'); socket.bind(protocol.PROTOCOL_PORT);`] use the send function : `socket.send(message, 0, message.length, protocol.PROTOCOL_PORT, protocol.PROTOCOL_MULTICAST_ADDRESS,
+        function(err, bytes) {
+        console.log("Sending payload: " + payload + " via port " + socket.address().port);
+    });`
 |Question | In Node.js, how can we **access the command line arguments**?
-| | *Enter your response here...*
+| | `var requestedInstrument = process.argv[2];` note : node[0] musician[1] piano[2]
 
 
 ## Task 3: package the "musician" app in a Docker image
