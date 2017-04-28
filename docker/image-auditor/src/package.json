@@ -1,0 +1,9 @@
+{
+  "name": "image-auditor",
+  "version": "1.0.0",
+  "author": "Camilo PINEDA SERNA",
+  "description": "app wich recieves UPD payloads with JSON data from musicians has a TCP",
+  "dependencies": {
+    "net": "^1.0.2"
+  }
+}
