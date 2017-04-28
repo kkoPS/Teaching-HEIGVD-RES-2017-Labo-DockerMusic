@@ -146,17 +146,17 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic
 | ---  | ---
 |Question | How do we **define and build our own Docker image**?
-| | *Enter your response here...*
+| | magic __Dockerfile__ then `docker build .`
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?
-| | *Enter your response here...*
+| | path to main source file. shouldn't this be replaced by `CMD` ?
 |Question | After building our Docker image, how do we use it to **run containers**?
-| | *Enter your response here...*
+| | docker run <ID_IMAGE> <args>
 |Question | How do we get the list of all **running containers**?
-| | *Enter your response here...*
+| | docker ps [-a]
 |Question | How do we **stop/kill** one running container?
-| | *Enter your response here...*
+| | docker stop <ID_CONT>; docker rm <ID_CONT>; or docker kill <ID_CONT>
 |Question | How can we check that our running containers are effectively sending UDP datagrams?
-| | *Enter your response here...*
+| | sniff the network. Wireshark??
 
 
 ## Task 4: implement an "auditor" Node.js application
@@ -164,15 +164,19 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic
 | ---  | ---
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group?
-| | *Enter your response here...*
+| | `var socket = dgram.createSocket('udp4');
+socket.bind(protocol.PROTOCOL_PORT, function() {
+    console.log("Joining multicast group");
+    socket.addMembership(protocol.PROTOCOL_MULTICAST_ADDRESS);
+});` bind a socket to the multicast adddress. then add to the group  and listening with socket.on(<fct>)
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? 
-| | *Enter your response here...*
+| | create and populate map. Then use the method get(<key>) to retrieve the value.
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? 
-| | *Enter your response here...*
+| | not used. https://momentjs.com/ and https://momentjs.com/docs/#/displaying/as-iso-string/ but note that _From version 2.8.4 the native Date.prototype.toISOString is used if available, for performance reasons._
 |Question | When and how do we **get rid of inactive players**? 
-| | *Enter your response here...*
+| | when a connexion is accepted : filter the array
 |Question | How do I implement a **simple TCP server** in Node.js? 
-| | *Enter your response here...*
+| | net something
 
 
 ## Task 5: package the "auditor" app in a Docker image
